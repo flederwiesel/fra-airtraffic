@@ -1,0 +1,7 @@
+/redist
+/x64
+/Win32
+/*.aps
+/*.sdf
+/*.suo
+/ipch

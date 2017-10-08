@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="fra-airtraffic" Database="" Version="10.0.0">
+  <Project Name="fra-airtraffic" Path="codelite.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="fra-airtraffic" ConfigName="Debug"/>
+      <Project Name="routes" ConfigName="Debug"/>
+      <Project Name="login" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="no">
+      <Environment/>
+      <Project Name="fra-airtraffic" ConfigName="Release"/>
+      <Project Name="routes" ConfigName="Release"/>
+      <Project Name="login" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Debug Preview" Selected="no">
+      <Environment/>
+      <Project Name="routes" ConfigName="Debug"/>
+      <Project Name="fra-airtraffic" ConfigName="Debug Preview"/>
+      <Project Name="login" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Debug ScreenshotContainer" Selected="no">
+      <Environment/>
+      <Project Name="routes" ConfigName="Debug"/>
+      <Project Name="fra-airtraffic" ConfigName="Debug ScreenshotContainer"/>
+      <Project Name="login" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release Win64" Selected="no">
+      <Environment/>
+      <Project Name="login" ConfigName="Release"/>
+      <Project Name="routes" ConfigName="Release"/>
+      <Project Name="fra-airtraffic" ConfigName="Release Win64"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release Win32" Selected="no">
+      <Environment/>
+      <Project Name="login" ConfigName="Release"/>
+      <Project Name="routes" ConfigName="Release"/>
+      <Project Name="fra-airtraffic" ConfigName="Release Win32"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release ScreenshotContainer" Selected="no">
+      <Environment/>
+      <Project Name="fra-airtraffic" ConfigName="Release ScreenshotContainer"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
