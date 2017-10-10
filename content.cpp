@@ -18,12 +18,17 @@
  */
 
 #include <float.h>
+#include <limits>
 #include <stdexcept>
 #include "stdpaths.h"
 #include "fra-airtraffic.h"
 #include "container.h"
 #include "content.h"
 #include "gc.h"
+
+#ifdef  _MSC_VER
+static const double NAN = std::numeric_limits<double>::quiet_NaN();
+#endif
 
 wxBitmap SaverContent::bkgnd;
 wxBitmap SaverContent::clock;
@@ -614,8 +619,8 @@ void SaverContent::ParseJSON(const char *name, const char *value, JsonType_t typ
 			a.iata = NULL;
 			a.name = NULL;
 #endif
-			a.lat = strtod("NAN", NULL);
-			a.lon = strtod("NAN", NULL);
+			a.lat = NAN;
+			a.lon = NAN;
 
 			airports.append(a);
 		}
