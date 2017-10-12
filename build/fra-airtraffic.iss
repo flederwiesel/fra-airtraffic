@@ -54,9 +54,7 @@ Compression=lzma/max
 OutputDir=.
 OutputBaseFilename=fra-airtraffic-{#ApplicationVersion}
 ; signtool.exe sign $p $f
-; /t http://timestamp.comodoca.com/authenticode
-; /t http://localhost:3128/sign
-SignTool=signtool /n fra-flugplan.de /d "fra-airtraffic.scr"
+SignTool=signtool /t http://time.certum.pl /n "Open Source Developer, Tobias Kühne" /d "fra-airtraffic.scr"
 SignedUninstaller=yes
 
 UninstallFilesDir=uninst
