@@ -32,7 +32,7 @@ VersionInfoTextVersion={#ApplicationVersion}
 ; Setup.exe Versioninfo "Product Name"
 VersionInfoProductName=fra-airtraffic
 ; Setup.exe Versioninfo "Comments"
-VersionInfoDescription={cm:appcomments}
+VersionInfoDescription=screensaver displaying air traffic @FRA
 
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64
