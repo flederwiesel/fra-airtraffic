@@ -42,7 +42,7 @@ CreateAppDir=yes
 UsePreviousAppDir=yes
 DirExistsWarning=no
 EnableDirDoesntExistWarning=no
-
+ChangesEnvironment=yes
 WindowVisible=no
 DisableProgramGroupPage=yes
 ShowComponentSizes=no
@@ -71,15 +71,15 @@ Source: msvc/x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignorevers
 #if (WXDLL == "GCC")
 ; currently TDM-GCC compiled version does not work on the login screen:
 ; https://sourceforge.net/p/tdm-gcc/bugs/324/
-Source: {#WXWIN}/lib/gcc_dll32/wxbase311u_gcc_flederwiesel.dll;     DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll32/wxmsw311u_core_gcc_flederwiesel.dll; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxbase311u_gcc_flederwiesel.dll;     DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxmsw311u_core_gcc_flederwiesel.dll; DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll32/wxbase311u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll32/wxmsw311u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll64/wxbase311u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll64/wxmsw311u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 #else
-Source: {#WXWIN}/lib/vc_dll/wxbase311u_vc_flederwiesel.dll;             DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_dll/wxmsw311u_core_vc_flederwiesel.dll;         DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxbase311u_vc_x64_flederwiesel.dll;     DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxmsw311u_core_vc_x64_flederwiesel.dll; DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxbase311u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxmsw311u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxbase311u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxmsw311u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
 Source: msvc/redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
 Source: msvc/redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
@@ -120,10 +120,21 @@ Filename: "{tmp}\vcredist_x64.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~
 en.screensaver=screensaver
 de.screensaver=Bildschirmschoner
 
-en.appcomments=Screensaver displaying air traffic to/from Frankfurt International Airport.
-de.appcomments=Bildschirmschoner, der Flüge von/nach Frankfurt International Airport anzeigt.
+en.AppComments=Screensaver displaying air traffic to/from Frankfurt International Airport.
+de.AppComments=Bildschirmschoner, der Flüge von/nach Frankfurt International Airport anzeigt.
+
+en.finished=Setup has finished installing fra-airtraffic screensaver on your computer.
+de.finished=Das Setup hat die Installation von fra-airtraffic Bildschirmschoner auf Ihrem Computer abgeschlossen.
+
+en.ClickFinish=Click Finish to exit Setup.
+de.ClickFinish=Klicken Sie auf "Fertigstellen", um das Setup zu beenden.
+
+en.ErrorAppendPath=%nSetup was unable to modify your PATH environment variable.%nPlease add "{app}" manually, otherwise the screensaver will not start.%n
+de.ErrorAppendPath=%nSetup konnte die PATH-Umgebungsvariable nicht ändern.%nBitte "{app}" manuell hinzufügen, sonst kann der Bildschirmschoner nicht gestartet werden.%n
 
 [Code]
+var errorinfo: String;
+
 { https://stackoverflow.com/questions/11137424/how-to-make-vcredist-x86-reinstall-only-if-not-yet-installed#answer-11172939 }
 #IFDEF UNICODE
 	#DEFINE AW "W"
@@ -181,4 +192,167 @@ begin
 	URLLabel.Cursor := crHand;
 	URLLabel.OnClick := @URLLabelOnClick;
 	URLLabel.Parent := WizardForm;
+end;
+
+procedure FindPathEntry(key, location: string; var path: String; var off: Integer);
+var
+	compare: String;
+	entry: String;
+	len: integer;
+	start: integer;
+begin
+	// get environment from registry instead of setup's environment
+	if (RegQueryStringValue(HKEY_LOCAL_MACHINE,
+		'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+		key, path) <> True) then
+	begin
+		errorinfo := ExpandConstant('{cm:ErrorAppendPath}');
+		StringChangeEx(errorinfo, '{app}', location, True);
+	end
+	else
+	begin
+		// compare all lowercase, but keep original
+		location := LowerCase(location);
+		compare := Trim(LowerCase(path));
+		len := Length(compare);
+		start := 0;
+		// don't regard direction of path separators
+		StringChangeEx(location, '/', '\', True);
+		StringChangeEx(compare, '/', '\', True);
+
+		repeat
+			off := Pos(';', compare);
+
+			if (off = 0) then
+			begin
+				// end of string
+				len := 0;
+				entry := compare
+			end
+			else
+			begin
+				len := len - off;
+				entry := Copy(compare, 1, off - 1);
+			end;
+
+			entry := Trim(entry);
+
+			if (entry = location) then
+				off := start + 1 // for ';'
+			else
+			begin
+				if (off > 0) then
+				begin
+					start := start + off;
+					compare := Copy(compare, off + 1, len);
+				end
+			end;
+		until len <= 0;
+	end;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+var
+	text: String;
+	ErrorLabel: TNewStaticText;
+	ClickLabel: TNewStaticText;
+begin
+	if (wpFinished = CurPageID) then
+	begin
+		// if `errorinfo` is set, display message on the wpFinished page,
+		// as this is less annoying than a message box
+		if (Length(errorinfo) > 0) then
+			StringChangeEx(text, '{$errorinfo}', errorinfo, true)
+		else
+			StringChangeEx(text, '{$errorinfo}', '', true);
+
+		WizardForm.FinishedLabel.Caption := ExpandConstant('{cm:finished}');
+		WizardForm.FinishedLabel.AutoSize := True;
+
+		ErrorLabel := TNewStaticText.Create(WizardForm);
+
+		ErrorLabel.Parent := WizardForm.FinishedPage;
+		// this must be set before Top/Left/Width
+		ErrorLabel.AutoSize := True	;
+		ErrorLabel.WordWrap := True;
+		ErrorLabel.Left := WizardForm.FinishedLabel.Left;
+		ErrorLabel.Top := WizardForm.FinishedLabel.Top + WizardForm.FinishedLabel.Height;
+		ErrorLabel.Width := WizardForm.FinishedLabel.Width;
+		ErrorLabel.Font.Style := [fsBold];
+		ErrorLabel.Caption := errorinfo;
+
+		ClickLabel := TNewStaticText.Create(WizardForm);
+
+		ClickLabel.Parent := WizardForm.FinishedPage;
+		ClickLabel.Left := ErrorLabel.Left;
+		ClickLabel.Top := ErrorLabel.Top + ErrorLabel.Height;
+		ClickLabel.Caption := ExpandConstant('{cm:ClickFinish}');
+		ClickLabel.AutoSize := True;
+	end
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+	location: String;
+	path: String;
+	off: Integer;
+begin
+	if (ssPostInstall = CurStep) then
+	begin
+		// add {app} to path, if not already done by previous installs
+		location := Trim(ExpandConstant('{app}'));
+
+		FindPathEntry('PATH', location, path, off);
+
+		if (off = 0) then
+		begin
+			// location not found within path
+			if (RegWriteStringValue(HKEY_LOCAL_MACHINE,
+				'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+				'PATH', path + ';' + location) <> True) then
+			begin
+				errorinfo := ExpandConstant('{cm:ErrorAppendPath}');
+				StringChangeEx(errorinfo, '{app}', location, True);
+			end
+		end
+	end
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+	location: String;
+	path: String;
+	len: Integer;
+	off: Integer;
+	total: Integer;
+begin
+	if (usPostUninstall = CurUninstallStep) then
+	begin
+		// remove {app} from path
+		location := Trim(ExpandConstant('{app}'));
+
+		FindPathEntry('PATH', location, path, off);
+
+		len := Length(location);
+		total := Length(path);
+
+		if (off > 0) then
+		begin
+			if (off > 1) then
+				path := Copy(path, 1, off - 2) +
+						Copy(path, off + len, total - off - 2)
+			else
+			begin
+				if (len < total) then
+					if (Copy(path, len + 1, 1) = ';') then
+						len := len + 1;
+
+				path := Copy(path, off + len, total - off - 2);
+			end;
+
+			RegWriteStringValue(HKEY_LOCAL_MACHINE,
+				'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+				'PATH', path);
+		end
+	end
 end;
