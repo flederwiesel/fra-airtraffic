@@ -69,7 +69,8 @@ Source: msvc/Win32/Release/fra-airtraffic.scr; DestDir: {sys}; Flags: ignorevers
 Source: msvc/x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
 #if (WXDLL == "GCC")
-; http://stackoverflow.com/questions/2002247/can-one-use-environment-variables-in-inno-setup-scripts#answer-18088994
+; currently TDM-GCC compiled version does not work on the login screen:
+; https://sourceforge.net/p/tdm-gcc/bugs/324/
 Source: {#WXWIN}/lib/gcc_dll32/wxbase311u_gcc_flederwiesel.dll;     DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/gcc_dll32/wxmsw311u_core_gcc_flederwiesel.dll; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/gcc_dll64/wxbase311u_gcc_flederwiesel.dll;     DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
