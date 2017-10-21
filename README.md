@@ -20,6 +20,7 @@ Limitations
 Planned features
 -
 
+- Online update of program binaries
 - Daily updated flight data
 - Realtime (not accelerated) display
 - Show day/night terminator

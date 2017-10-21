@@ -19,6 +19,7 @@ werden nur statische Daten (keine aktuellen) benutzt.
 Geplante Funktionen
 -
 
+- Online-Update der Programmdateien
 - T&auml;glich aktualisierte Flugdaten
 - Echtzeitanzeige (nicht beschleunigt)
 - Tag/Nacht Trennlinie anzeigen
