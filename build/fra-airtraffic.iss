@@ -115,6 +115,7 @@ Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaverIsSecur
 [Run]
 Filename: "{tmp}\vcredist_x86.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~3.EXE /q:a /c:""""msiexec /i vcredist.msi /qn"""" """; WorkingDir: {tmp}; StatusMsg: "Installing VC++ 2010 Redistributable..."; Check: NOT Is64BitInstallMode And VCRedistNeedsInstallX86
 Filename: "{tmp}\vcredist_x64.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~3.EXE /q:a /c:""""msiexec /i vcredist.msi /qn"""" """; WorkingDir: {tmp}; StatusMsg: "Installing VC++ 2010 Redistributable..."; Check:     Is64BitInstallMode And VCRedistNeedsInstallX64
+Filename: "{sys}\rundll32.exe"; Parameters: "{sys}\shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver"; Description: "{cm:ControlPanel}"; Flags: postinstall skipifsilent
 
 [CustomMessages]
 en.screensaver=screensaver
@@ -131,6 +132,9 @@ de.ClickFinish=Klicken Sie auf "Fertigstellen", um das Setup zu beenden.
 
 en.ErrorAppendPath=%nSetup was unable to modify your PATH environment variable.%nPlease add "{app}" manually, otherwise the screensaver will not start.%n
 de.ErrorAppendPath=%nSetup konnte die PATH-Umgebungsvariable nicht ändern.%nBitte "{app}" manuell hinzufügen, sonst kann der Bildschirmschoner nicht gestartet werden.%n
+
+en.ControlPanel=Lanuch control panel to adjust screensaver settings.
+de.ControlPanel=Systemsteuerung aufrufen, um Bildschirmschoner-Einstellungen vorzunehmen.
 
 [Code]
 var errorinfo: String;
