@@ -4,7 +4,7 @@
 #define ApplicationVersion GetFileVersion('msvc/x64/Release/fra-airtraffic.scr')
 
 [Setup]
-; Registry key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{AppId}
+; Registry key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{AppId}_is1
 AppId=fra-airtraffic
 ; Wizard AppName
 AppName=fra-airtraffic {cm:screensaver}
@@ -177,18 +177,16 @@ procedure URLLabelOnClick(Sender: TObject);
 var
 	Err: Integer;
 begin
-	ShellExec('open', 'http://www.innosetup.com', '', '', SW_SHOW, ewNoWait, Err);
+	ShellExec('open', 'https://www.innosetup.com', '', '', SW_SHOW, ewNoWait, Err);
 end;
 
 procedure InitializeWizard();
 var
-	CancelButton: TButton;
 	URLLabel: TNewStaticText;
 begin
-	CancelButton := WizardForm.CancelButton;
-
 	URLLabel := TNewStaticText.Create(WizardForm);
-	URLLabel.Top := CancelButton.Top + CancelButton.Height - URLLabel.Height - 2;
+	URLLabel.Top := WizardForm.CancelButton.Top +
+					WizardForm.CancelButton.Height - URLLabel.Height - 2;
 	URLLabel.Left := 20;
 	URLLabel.Caption := 'www.innosetup.com';
 	URLLabel.Font.Style := URLLabel.Font.Style + [fsUnderLine];
