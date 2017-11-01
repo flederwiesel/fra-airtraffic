@@ -99,9 +99,6 @@ Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaveActive; ValueTyp
 ; https://technet.microsoft.com/en-us/library/cc978621.aspx
 ; Specifies the how long the system remains idle before the screen saver starts.
 Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaveTimeOut; ValueType: string; ValueData: 180
-; https://technet.microsoft.com/en-us/library/cc959646.aspx
-; Specifies whether the screen saver is password-protected. When a screen saver is password-protected, the user must enter the correct password to end the screen saver.
-Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaverIsSecure; ValueType: string; ValueData: 0
 
 ; Some sources also mention this path:
 ;HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Control Panel\Desktop
@@ -110,7 +107,6 @@ Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaverIsSecure; Value
 Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: SCRNSAVE.EXE; ValueType: string; ValueData: %SystemRoot%\System32\fra-airtraffic.scr
 Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaveActive; ValueType: string; ValueData: 1
 Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaveTimeOut; ValueType: string; ValueData: 180
-Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaverIsSecure; ValueType: string; ValueData: 0
 
 [Run]
 Filename: "{tmp}\vcredist_x86.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~3.EXE /q:a /c:""""msiexec /i vcredist.msi /qn"""" """; WorkingDir: {tmp}; StatusMsg: "Installing VC++ 2010 Redistributable..."; Check: NOT Is64BitInstallMode And VCRedistNeedsInstallX86
