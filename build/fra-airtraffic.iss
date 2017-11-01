@@ -111,7 +111,7 @@ Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaveTimeOut;
 [Run]
 Filename: "{tmp}\vcredist_x86.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~3.EXE /q:a /c:""""msiexec /i vcredist.msi /qn"""" """; WorkingDir: {tmp}; StatusMsg: "Installing VC++ 2010 Redistributable..."; Check: NOT Is64BitInstallMode And VCRedistNeedsInstallX86
 Filename: "{tmp}\vcredist_x64.exe"; Parameters: "/q /norestart /q:a /c:""VCREDI~3.EXE /q:a /c:""""msiexec /i vcredist.msi /qn"""" """; WorkingDir: {tmp}; StatusMsg: "Installing VC++ 2010 Redistributable..."; Check:     Is64BitInstallMode And VCRedistNeedsInstallX64
-Filename: "{sys}\rundll32.exe"; Parameters: "{sys}\shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver"; Description: "{cm:ControlPanel}"; Flags: postinstall skipifsilent
+Filename: "{sys}\rundll32.exe"; Parameters: "{sys}\shell32.dll,Control_RunDLL desk.cpl,,@ScreenSaver"; Description: "{cm:ControlPanel}"; Flags: postinstall skipifsilent runascurrentuser
 
 [CustomMessages]
 en.screensaver=screensaver
@@ -129,7 +129,7 @@ de.ClickFinish=Klicken Sie auf "Fertigstellen", um das Setup zu beenden.
 en.ErrorAppendPath=%nSetup was unable to modify your PATH environment variable.%nPlease add "{app}" manually, otherwise the screensaver will not start.%n
 de.ErrorAppendPath=%nSetup konnte die PATH-Umgebungsvariable nicht ändern.%nBitte "{app}" manuell hinzufügen, sonst kann der Bildschirmschoner nicht gestartet werden.%n
 
-en.ControlPanel=Lanuch control panel to adjust screensaver settings.
+en.ControlPanel=Launch control panel to adjust screensaver settings.
 de.ControlPanel=Systemsteuerung aufrufen, um Bildschirmschoner-Einstellungen vorzunehmen.
 
 [Code]
@@ -249,6 +249,9 @@ begin
 	end;
 end;
 
+function SetEnvironmentVariable(lpName, lpValue: String): Boolean;
+external 'SetEnvironmentVariable{#AW}@kernel32.dll stdcall delayload';
+
 procedure CurPageChanged(CurPageID: Integer);
 var
 	text: String;
@@ -271,7 +274,7 @@ begin
 
 		ErrorLabel.Parent := WizardForm.FinishedPage;
 		// this must be set before Top/Left/Width
-		ErrorLabel.AutoSize := True	;
+		ErrorLabel.AutoSize := True;
 		ErrorLabel.WordWrap := True;
 		ErrorLabel.Left := WizardForm.FinishedLabel.Left;
 		ErrorLabel.Top := WizardForm.FinishedLabel.Top + WizardForm.FinishedLabel.Height;
@@ -286,6 +289,13 @@ begin
 		ClickLabel.Top := ErrorLabel.Top + ErrorLabel.Height;
 		ClickLabel.Caption := ExpandConstant('{cm:ClickFinish}');
 		ClickLabel.AutoSize := True;
+
+		{ Even though ChangesEnvironment=yes, this only updates the shell (explorer)
+		environment, the installer's environment is obviously not updated.
+		As the installer launches the entries in the [Run] section to show the
+		screensaver settings dialog, we already need the new PATH here...
+		See http://news.jrsoftware.org/news/innosetup/msg95313.html }
+		SetEnvironmentVariable('PATH', GetEnv('PATH') + ';' + ExpandConstant('{app}'));
 	end
 end;
 
