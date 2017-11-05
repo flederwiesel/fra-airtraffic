@@ -24,7 +24,7 @@ if not exist redist\vcredist_x64.exe (
 %COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x64 && MSBuild.exe /p:Configuration=Release /p:Platform=x64   %~dp0\fra-airtraffic.sln" && ^
 iscc "%~dp0..\fra-airtraffic.iss"
 
-if %errorlevel% == 0 goto eof
+if %errorlevel% == 0 goto :eof
 
 :error
 exit /b %errorlevel%
