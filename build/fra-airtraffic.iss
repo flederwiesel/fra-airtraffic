@@ -90,9 +90,10 @@ Source: ../img/bluemarble/1920x960/*; DestDir: {app}/img/1920x960; Flags: recurs
 Source: ../json/schedule.json; DestDir: {commonappdata}/flederwiesel/fra-airtraffic; Flags: ignoreversion; Permissions: authusers-modify everyone-readexec; Excludes: test.json
 
 [Registry]
+#define SCRNSAVE_EXE '{sys}\fra-airtraffic.scr'
 ; https://technet.microsoft.com/en-us/library/cc978622.aspx
 ; Specifies the name of the screen saver executable file.
-Root: HKCU; Subkey: Control Panel\Desktop; ValueName: SCRNSAVE.EXE; ValueType: string; ValueData: %SystemRoot%\System32\fra-airtraffic.scr
+Root: HKCU; Subkey: Control Panel\Desktop; ValueName: SCRNSAVE.EXE; ValueType: string; ValueData: {#SCRNSAVE_EXE}
 ; https://technet.microsoft.com/en-us/library/cc978620.aspx
 ; Specifies whether a screen saver is selected.
 Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaveActive; ValueType: string; ValueData: 1
@@ -104,7 +105,7 @@ Root: HKCU; Subkey: Control Panel\Desktop; ValueName: ScreenSaveTimeOut; ValueTy
 ;HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Control Panel\Desktop
 ;HKCU\Software\Policies\Microsoft\Control Panel
 
-Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: SCRNSAVE.EXE; ValueType: string; ValueData: %SystemRoot%\System32\fra-airtraffic.scr
+Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: SCRNSAVE.EXE; ValueType: string; ValueData: {#SCRNSAVE_EXE}
 Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaveActive; ValueType: string; ValueData: 1
 Root: HKU; Subkey: .DEFAULT\Control Panel\Desktop; ValueName: ScreenSaveTimeOut; ValueType: string; ValueData: 180
 
@@ -133,7 +134,11 @@ en.ControlPanel=Launch control panel to adjust screensaver settings.
 de.ControlPanel=Systemsteuerung aufrufen, um Bildschirmschoner-Einstellungen vorzunehmen.
 
 [Code]
-var errorinfo: String;
+var
+	errorinfo: String;
+	ScrnsaveExe : array[0..1] of String;
+	ScreenSaveActive: array[0..1] of String;
+	ScreenSaveTimeOut: array[0..1] of String;
 
 { https://stackoverflow.com/questions/11137424/how-to-make-vcredist-x86-reinstall-only-if-not-yet-installed#answer-11172939 }
 #IFDEF UNICODE
@@ -179,6 +184,9 @@ end;
 procedure InitializeWizard();
 var
 	URLLabel: TNewStaticText;
+	i: Integer;
+	key: Integer;
+	sub: String;
 begin
 	URLLabel := TNewStaticText.Create(WizardForm);
 	URLLabel.Top := WizardForm.CancelButton.Top +
@@ -190,6 +198,54 @@ begin
 	URLLabel.Cursor := crHand;
 	URLLabel.OnClick := @URLLabelOnClick;
 	URLLabel.Parent := WizardForm;
+
+	// remember previous setting to be restored upon uninstall
+	for i := 0 to 1 do
+	begin
+		if (0 = i) then
+		begin
+			key := HKEY_CURRENT_USER;
+			sub := 'Control Panel\Desktop';
+		end
+		else
+		begin
+			key := HKEY_USERS;
+			sub := '.DEFAULT\Control Panel\Desktop';
+		end;
+
+		// if value is not available, use non-empty defaults for RegisterPreviousData() to
+		// determine whether we already have saved previous values
+		if (RegQueryStringValue(key, sub, 'SCRNSAVE.EXE', ScrnsaveExe[i]) <> True) then
+			ScrnsaveExe[i] := '(none)';
+
+		if (RegQueryStringValue(key, sub, 'ScreenSaveActive', ScreenSaveActive[i]) <> True) then
+			ScreenSaveActive[i] := '0';
+
+		if (RegQueryStringValue(key, sub, 'ScreenSaveTimeOut', ScreenSaveTimeOut[i]) <> True) then
+			ScreenSaveTimeOut[i] := '0';
+	end;
+end;
+
+procedure RegisterPreviousData(PreviousDataKey: Integer);
+var
+	i: Integer;
+	prefix: String;
+begin
+	for i := 0 to 1 do
+	begin
+		if (1 = i) then
+			prefix := 'Login';
+
+		// only on first install, otherwise we would overwrite values upon update
+		if (GetPreviousData(prefix + 'SCRNSAVE.EXE', '') = '') then
+			SetPreviousData(PreviousDataKey, prefix + 'SCRNSAVE.EXE', ScrnsaveExe[i]);
+
+		if (GetPreviousData(prefix + 'ScreenSaveActive', '') = '') then
+			SetPreviousData(PreviousDataKey, prefix + 'ScreenSaveActive', ScreenSaveActive[i]);
+
+		if (GetPreviousData(prefix + 'ScreenSaveTimeOut', '') = '') then
+			SetPreviousData(PreviousDataKey, prefix + 'ScreenSaveTimeOut', ScreenSaveTimeOut[i]);
+	end;
 end;
 
 procedure FindPathEntry(key, location: string; var path: String; var off: Integer);
@@ -333,8 +389,13 @@ var
 	len: Integer;
 	off: Integer;
 	total: Integer;
+	i, j: Integer;
+	key: Integer;
+	sub: String;
+	prefix: String;
+	value: String;
 begin
-	if (usPostUninstall = CurUninstallStep) then
+	if (usUninstall = CurUninstallStep) then
 	begin
 		// remove {app} from path
 		location := Trim(ExpandConstant('{app}'));
@@ -361,6 +422,50 @@ begin
 			RegWriteStringValue(HKEY_LOCAL_MACHINE,
 				'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
 				'PATH', path);
-		end
-	end
+		end;
+		
+		// restore settings from previous data, unless we are not selected screensaver any more
+		for i := 0 to 1 do
+		begin
+			if (0 = i) then
+			begin
+				key := HKEY_CURRENT_USER
+				sub := 'Control Panel\Desktop';
+			end
+			else
+			begin
+				key := HKEY_USERS
+				sub := '.Default\Control Panel\Desktop';
+				prefix := 'Login';
+			end;
+
+			RegQueryStringValue(key, sub, 'SCRNSAVE.EXE', location);
+
+			if (location = ExpandConstant('{#SCRNSAVE_EXE}')) then
+			begin
+				// we're still the selected screensaver, try restoring
+				// previous settings, if they are empty, delete key
+				value := GetPreviousData(prefix + 'SCRNSAVE.EXE', '(none)');
+
+				if (value = '(none)') then
+					RegDeleteValue(key, sub, 'SCRNSAVE.EXE')
+				else
+					RegWriteStringValue(key, sub, 'SCRNSAVE.EXE', value);
+
+				value := GetPreviousData(prefix + 'ScreenSaveActive', '0');
+
+				if (value = '0') then
+					RegDeleteValue(key, sub, 'ScreenSaveActive')
+				else
+					RegWriteStringValue(key, sub, 'ScreenSaveActive', value);
+
+				value := GetPreviousData(prefix + 'ScreenSaveTimeOut', '0');
+
+				if (value = '0') then
+					RegDeleteValue(key, sub, 'ScreenSaveTimeOut')
+				else
+					RegWriteStringValue(key, sub, 'ScreenSaveTimeOut', value);
+			end;
+		end;
+	end;
 end;
