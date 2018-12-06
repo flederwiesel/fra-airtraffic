@@ -20,6 +20,7 @@
 #ifndef CONTENT_H
 #define CONTENT_H
 
+#include <vector>
 #include <wx/window.h>
 #include <wx/dcbuffer.h>
 #include "fra-airtraffic.h"
