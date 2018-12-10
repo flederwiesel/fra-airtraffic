@@ -303,8 +303,8 @@ void SaverContent::DrawInfoText(wxAutoBufferedPaintDC &dc)
 	{
 		x = rc.x;
 
-		dc.DrawText(wxString::Format("[%zu] %s",
-						selected, flights[selected].code),
+		dc.DrawText(wxString::Format("[%llu] %s",
+						(unsigned long long)selected, flights[selected].code),
 					x, y + fm.height);
 	}
 #endif
