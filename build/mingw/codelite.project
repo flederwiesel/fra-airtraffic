@@ -132,7 +132,7 @@
       </Compiler>
       <Linker Options="-mwindows;$(shell wx-config   --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugScrenshotContainer" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugScreenshotContainer" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
