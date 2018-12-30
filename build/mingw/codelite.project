@@ -12,12 +12,10 @@
     <File Name="../../json.c"/>
     <File Name="../../gc.c"/>
     <File Name="../../main.cpp"/>
-    <File Name="fra-airtraffic.rc"/>
     <File Name="../../preview.cpp"/>
     <File Name="../../container.cpp"/>
     <File Name="../../content.cpp"/>
     <File Name="../../screenshot.cpp"/>
-    <File Name="../../json/schedule.json"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="../../fra-airtraffic.h"/>
@@ -28,6 +26,10 @@
     <File Name="../../container.h"/>
     <File Name="../../content.h"/>
     <File Name="../../screenshot.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="res">
+    <File Name="fra-airtraffic.rc"/>
+    <File Name="../../json/schedule.json"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Debug Preview"/>
@@ -50,7 +52,7 @@
         <IncludePath Value=".."/>
         <Preprocessor Value="_DEBUG"/>
       </Compiler>
-      <Linker Options="-mwindows;$(shell wx-config   --libs --unicode=yes)" Required="yes"/>
+      <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Debug" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
@@ -90,7 +92,7 @@
         <IncludePath Value=".."/>
         <Preprocessor Value="_DEBUG"/>
       </Compiler>
-      <Linker Options="-mwindows;$(shell wx-config   --libs --unicode=yes)" Required="yes"/>
+      <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugPreview" Command="$(Windir)\System32\rundll32.exe" CommandArguments="shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
@@ -130,7 +132,7 @@
         <IncludePath Value=".."/>
         <Preprocessor Value="_DEBUG"/>
       </Compiler>
-      <Linker Options="-mwindows;$(shell wx-config   --libs --unicode=yes)" Required="yes"/>
+      <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugScreenshotContainer" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
