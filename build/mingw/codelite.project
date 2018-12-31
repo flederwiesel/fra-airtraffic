@@ -54,7 +54,7 @@
       </Compiler>
       <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Debug" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -94,7 +94,7 @@
       </Compiler>
       <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugPreview" Command="$(Windir)\System32\rundll32.exe" CommandArguments="shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(Windir)\System32\rundll32.exe" CommandArguments="shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -134,7 +134,7 @@
       </Compiler>
       <Linker Options="-mwindows;$(shell wx-config --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/DebugScreenshotContainer" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -174,7 +174,7 @@
       </Compiler>
       <Linker Options="-mwindows;-s;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Release" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -214,7 +214,7 @@
       </Compiler>
       <Linker Options="-mwindows;-s;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Release" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -254,7 +254,7 @@
       </Compiler>
       <Linker Options="-mwindows;-s;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags);--output-format=coff;--target=pe-i386;-D__i386__;-UWX_CPU_AMD64" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Release32" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[WXCFG=gcc_dll32/mswu]]>
@@ -294,7 +294,7 @@
       </Compiler>
       <Linker Options="-mwindows;-s;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags);--output-format=coff;--target=pe-x86-64" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/Release64" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[WXCFG=gcc_dll64/mswu]]>
