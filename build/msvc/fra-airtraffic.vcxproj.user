@@ -12,6 +12,32 @@
     <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_x64_dll;$(PATH)</LocalDebuggerEnvironment>
     <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Preview|Win32'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>$(Windir)\System32\rundll32.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Preview|x64'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>$(Windir)\System32\rundll32.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_x64_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug ScreenshotContainer|Win32'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>--screenshots</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug ScreenshotContainer|x64'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>--screenshots</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_x64_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommandArguments>-s</LocalDebuggerCommandArguments>
@@ -23,5 +49,17 @@
     <LocalDebuggerCommandArguments>-s</LocalDebuggerCommandArguments>
     <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_x64_dll;$(PATH)</LocalDebuggerEnvironment>
     <LocalDebuggerWorkingDirectory>$(WinDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release ScreenshotContainer|Win32'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>--screenshots</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release ScreenshotContainer|x64'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>--screenshots</LocalDebuggerCommandArguments>
+    <LocalDebuggerEnvironment>PATH=$(WXWIN)/lib/vc_x64_dll;$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)../..</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>
