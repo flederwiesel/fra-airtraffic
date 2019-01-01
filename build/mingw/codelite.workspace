@@ -5,37 +5,25 @@
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="fra-airtraffic" ConfigName="Debug"/>
-      <Project Name="routes" ConfigName="Debug"/>
-      <Project Name="login" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="no">
       <Environment/>
       <Project Name="fra-airtraffic" ConfigName="Release"/>
-      <Project Name="routes" ConfigName="Release"/>
-      <Project Name="login" ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Debug_Preview" Selected="no">
       <Environment/>
-      <Project Name="routes" ConfigName="Debug"/>
       <Project Name="fra-airtraffic" ConfigName="Debug_Preview"/>
-      <Project Name="login" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Debug_ScreenshotContainer" Selected="no">
       <Environment/>
-      <Project Name="routes" ConfigName="Debug"/>
       <Project Name="fra-airtraffic" ConfigName="Debug_ScreenshotContainer"/>
-      <Project Name="login" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release_Win64" Selected="no">
       <Environment/>
-      <Project Name="login" ConfigName="Release"/>
-      <Project Name="routes" ConfigName="Release"/>
       <Project Name="fra-airtraffic" ConfigName="Release_Win64"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release_Win32" Selected="no">
       <Environment/>
-      <Project Name="login" ConfigName="Release"/>
-      <Project Name="routes" ConfigName="Release"/>
       <Project Name="fra-airtraffic" ConfigName="Release_Win32"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release_ScreenshotContainer" Selected="no">
