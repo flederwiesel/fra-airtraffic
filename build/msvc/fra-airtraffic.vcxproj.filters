@@ -74,4 +74,12 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\img\JA805A.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\json\schedule.json">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

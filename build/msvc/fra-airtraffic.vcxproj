@@ -370,6 +370,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\img\JA805A.ico" />
+    <None Include="..\..\json\schedule.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
