@@ -51,7 +51,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
+ FILEVERSION 1,0,1,0
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -70,9 +70,9 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic Bildschirmschoner"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.1.0"
             VALUE "InternalName", "fra-airtraffic.scr"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic.scr"
             VALUE "ProductName", "fra-airtraffic"
             VALUE "ProductVersion", "1.0.0.0"
@@ -83,9 +83,9 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic screensaver"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.1.0"
             VALUE "InternalName", "fra-airtraffic.scr"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic"
             VALUE "ProductName", "fra-airtraffic"
             VALUE "ProductVersion", "1.0.0.0"
@@ -96,9 +96,9 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic screensaver"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.1.0"
             VALUE "InternalName", "fra-airtraffic"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic.scr"
             VALUE "ProductName", "fra-airtraffic"
             VALUE "ProductVersion", "1.0.0.0"

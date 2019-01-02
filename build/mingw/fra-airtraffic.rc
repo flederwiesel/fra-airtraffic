@@ -37,7 +37,7 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 // Version
 //
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
+ FILEVERSION 1,0,1,0
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -56,9 +56,9 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de\0"
             VALUE "CompanyName", "fra-flugplan.de\0"
             VALUE "FileDescription", "fra-airtraffic Bildschirmschoner\0"
-            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "FileVersion", "1.0.1.0\0"
             VALUE "InternalName", "fra-airtraffic.scr\0"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne\0"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne\0"
             VALUE "OriginalFilename", "fra-airtraffic.scr\0"
             VALUE "ProductName", "fra-airtraffic\0"
             VALUE "ProductVersion", "1.0.0.0\0"
@@ -69,9 +69,9 @@ BEGIN
            VALUE "Comments", "https://www.fra-flugplan.de\0"
             VALUE "CompanyName", "fra-flugplan.de\0"
             VALUE "FileDescription", "fra-airtraffic screensaver\0"
-            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "FileVersion", "1.0.1.0\0"
             VALUE "InternalName", "fra-airtraffic.scr\0"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne\0"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne\0"
             VALUE "OriginalFilename", "fra-airtraffic\0"
             VALUE "ProductName", "fra-airtraffic\0"
             VALUE "ProductVersion", "1.0.0.0\0"
@@ -82,9 +82,9 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de\0"
             VALUE "CompanyName", "fra-flugplan.de\0"
             VALUE "FileDescription", "fra-airtraffic screensaver\0"
-            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "FileVersion", "1.0.1.0\0"
             VALUE "InternalName", "fra-airtraffic\0"
-            VALUE "LegalCopyright", "Copyright © 2017 Tobias Kühne\0"
+            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne\0"
             VALUE "OriginalFilename", "fra-airtraffic.scr\0"
             VALUE "ProductName", "fra-airtraffic\0"
             VALUE "ProductVersion", "1.0.0.0\0"

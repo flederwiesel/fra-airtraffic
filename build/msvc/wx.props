@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This is a property sheet to be included in MSVS projects of the applications
+    using wxWidgets. Use "View|Property Manager" and choose "Add Existing
+    Property Sheet..." from the context menu to add it from the IDE or edit your
+    .vcxproj file directly and add <Import Project="path\to\wxwidgets.props">
+    tag to it.
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <WXWIN>$(SolutionDir)../../wxWidgets</WXWIN>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>user.wxWidgets</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="WXWIN">
+      <Value>$(WXWIN)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

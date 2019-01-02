@@ -57,7 +57,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll/mswud]]>
+        <![CDATA[WXCFG=gcc_dll/mswud
+PATH=$(WXWIN)/lib/gcc_dll;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -97,7 +98,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(Windir)\System32\rundll32.exe" CommandArguments="shell32.dll,Control_RunDLL desk.cpl,fra-airtraffic,@ScreenSaver" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll/mswud]]>
+        <![CDATA[WXCFG=gcc_dll/mswud
+PATH=$(WXWIN)/lib/gcc_dll;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -137,7 +139,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll/mswud]]>
+        <![CDATA[WXCFG=gcc_dll/mswud
+PATH=$(WXWIN)/lib/gcc_dll;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -177,7 +180,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll/mswu]]>
+        <![CDATA[WXCFG=gcc_dll/mswu
+PATH=$(WXWIN)/lib/gcc_dll;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -217,7 +221,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="--screenshots" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)/../.." PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll/mswu]]>
+        <![CDATA[WXCFG=gcc_dll/mswu
+PATH=$(WXWIN)/lib/gcc_dll;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -257,7 +262,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll32/mswu]]>
+        <![CDATA[WXCFG=gcc_dll32/mswu
+PATH=$(WXWIN)/lib/gcc_dll32;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -297,7 +303,8 @@
       <General OutputFile="$(IntermediateDirectory)/fra-airtraffic.scr" IntermediateDirectory="$(ProjectPath)/$(ConfigurationName)" Command="$(IntermediateDirectory)/fra-airtraffic.scr" CommandArguments="-s" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(Windir)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[WXCFG=gcc_dll64/mswu]]>
+        <![CDATA[WXCFG=gcc_dll64/mswu
+PATH=$(WXWIN)/lib/gcc_dll64;$(PATH)]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
