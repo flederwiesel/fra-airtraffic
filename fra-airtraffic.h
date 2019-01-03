@@ -50,6 +50,8 @@ typedef struct
 	unsigned long airport;
 	long scheduled;
 	long duration;
+	double bearing;
+	double distance;
 } flight_t;
 
 #ifdef __cplusplus

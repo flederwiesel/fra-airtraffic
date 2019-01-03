@@ -63,6 +63,9 @@ SaverContent::SaverContent(wxWindow* parent) :
 {
 	size_t num;
 	struct tm *local;
+	airport_t *ap;
+	flight_t *f;
+	size_t i;
 
 	if (-1 == now)
 	{
@@ -72,6 +75,16 @@ SaverContent::SaverContent(wxWindow* parent) :
 	else
 	{
 		local = NULL;
+	}
+
+	if (local)
+	{
+		now = local->tm_hour * 3600 + (local->tm_min - local->tm_min % 10) * 60;
+	}
+	else
+	{
+		now %= 86400;
+		now -= now % 600;
 	}
 
 	SetBackgroundStyle(wxBG_STYLE_PAINT);
@@ -118,36 +131,67 @@ SaverContent::SaverContent(wxWindow* parent) :
 			wxString data(MyStandardPaths::Get().GetDataDir() +
 						  wxT("/flederwiesel/fra-airtraffic/schedule.json"));
 #endif
-
+			// ParseSchedule() populates `airports` and `flights`
 			::ParseJSON(data.c_str(), ParseSchedule);
 
-			num = airports.size();
-
-			while (num--)
+			if (0 == airports.size() ||
+				0 == flights.size())
 			{
-				if (airports[num].icao)
-				if (0 == strcmp("EDDF", airports[num].icao))
-				{
-					fra = &airports[num];
-					break;
-				}
-			}
-		}
-
-		if (0 == airports.size() || 0 == flights.size())
-		{
-			throw std::runtime_error("Error initialising tables.");
-		}
-		else
-		{
-			if (local)
-			{
-				now = local->tm_hour * 3600 + (local->tm_min - local->tm_min % 10) * 60;
+				throw std::runtime_error("Error initialising tables.");
 			}
 			else
 			{
-				now %= 86400;
-				now -= now % 600;
+				// Get FRA coordinates
+				num = airports.size();
+
+				while (num--)
+				{
+					if (airports[num].icao)
+					if (0 == strcmp("EDDF", airports[num].icao))
+					{
+						fra = &airports[num];
+						break;
+					}
+				}
+			}
+
+			// Get distance and bearing for each flight
+			for (i = 0; i < flights.size(); i++)
+			{
+				f = &flights[i];
+
+				if (f->airport < airports.size())
+				{
+					ap = &airports[f->airport];
+
+					if (!wxIsNaN(ap->lat) &&
+						!wxIsNaN(ap->lon))
+					{
+						if (fra == ap)
+						{
+							f->distance = 0.0;
+							f->bearing = 0.0;
+						}
+						else
+						{
+							f->distance = GCDistance(fra->lat, fra->lon, ap->lat, ap->lon);
+							f->distance *= EARTH_RADIUS;
+
+							// openflights.org calculates flight duration as
+							// "30 min plus 1 hour per every 500 miles".
+							// If it fits their purpose, it is good enough for us...
+							if (f->duration < 0)
+								f->duration = -1800 - (long)(f->distance / 5.0 * 36.0);
+							else
+								f->duration = 1800 + (long)(f->distance / 5.0 * 36.0);
+
+							if (f->duration > 0)
+								f->bearing = GCBearing(fra->lat, fra->lon, ap->lat, ap->lon);
+							else
+								f->bearing = GCBearing(ap->lat, ap->lon, fra->lat, fra->lon);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -354,12 +398,11 @@ void SaverContent::OnPaint(wxPaintEvent &event)
 	wxAutoBufferedPaintDC dc(this);
 	wxMemoryDC mdc;
 	airport_t *ap;
+	flight_t *f;
 	gps_t pos;
 	long departure;
 	long arrival;
 	unsigned long arr, dep;
-	double bearing;
-	double distance;
 	double completed;
 	unsigned int i;
 	int x, y;
@@ -419,104 +462,97 @@ void SaverContent::OnPaint(wxPaintEvent &event)
 		}
 	}
 
+	// When painting, also count arrivals/departures
 	arr = 0;
 	dep = 0;
 
 	for (i = 0; i < flights.size(); i++)
 	{
-		ap = &airports[flights[i].airport];
+		f = &flights[i];
 
-		if (!wxIsNaN(ap->lat) &&
-			!wxIsNaN(ap->lon))
+		if (f->airport < airports.size())
 		{
-			distance = GCDistance(fra->lat, fra->lon, ap->lat, ap->lon);
-			distance *= EARTH_RADIUS;
+			ap = &airports[f->airport];
 
-			// openflights.org calculates flight duration as
-			// "30 min plus 1 hour per every 500 miles".
-			// If it fits their purpose, it is good enough for us...
-			if (flights[i].duration < 0)
-				flights[i].duration = -1800 - (long)(distance / 5.0 * 36.0);
-			else
-				flights[i].duration = 1800 + (long)(distance / 5.0 * 36.0);
-
-			// Is this flight airborne?
-			if (flights[i].duration > 0)
+			if (!wxIsNaN(ap->lat) &&
+				!wxIsNaN(ap->lon))
 			{
-				departure = flights[i].scheduled;
-				arrival   = flights[i].scheduled + flights[i].duration;
-
-				if (arrival - now > 86400)
-					arrival -= 86400;
-
-				if (departure > arrival)
-					departure -= 86400;
-			}
-			else
-			{
-				arrival   = flights[i].scheduled;
-				departure = flights[i].scheduled + flights[i].duration;
-
-				if (now - departure > 86400)
-					departure += 86400;
-
-				if (arrival < departure)
-					arrival += 86400;
-			}
-
-			if (now >= departure && now <= arrival)
-			{
-				// yes
-				if (flights[i].duration < 0)
-					arr++;
-				else
-					dep++;
-
-				completed = distance * (double)(now - departure) /
-					(double)(flights[i].duration < 0 ?
-						-flights[i].duration : flights[i].duration);
-
-				completed /= EARTH_RADIUS;
-
-				if (flights[i].duration > 0)
+				// Is this flight airborne?
+				if (f->duration > 0)
 				{
-					bearing = GCBearing(fra->lat, fra->lon,
-										ap->lat, ap->lon);
+					departure = f->scheduled;
+					arrival   = f->scheduled + f->duration;
 
-					pos = GCTravel(fra->lat, fra->lon, completed, bearing);
+					if (arrival - now > 86400)
+						arrival -= 86400;
+
+					if (departure > arrival)
+						departure -= 86400;
 				}
 				else
 				{
-					bearing = GCBearing(ap->lat, ap->lon,
-										fra->lat, fra->lon);
+					arrival   = f->scheduled;
+					departure = f->scheduled + f->duration;
 
-					pos = GCTravel(ap->lat, ap->lon, completed, bearing);
+					if (now - departure > 86400)
+						departure += 86400;
+
+					if (arrival < departure)
+						arrival += 86400;
 				}
 
-				// As from FRA no flights will wrap around, this is sufficient
-				x = (int)(( pos.lon + 180.0) / 360.0 * (double)rc.width) + rc.x;
-				y = (int)((-pos.lat +  90.0) / 180.0 * (double)rc.height) + rc.y;
+				if (now >= departure && now <= arrival)
+				{
+					// yes
+					if (f->duration < 0)
+						arr++;
+					else
+						dep++;
+
+					if (0.0 == f->duration)
+					{
+						pos.lat = ap->lat;
+						pos.lon = ap->lon;
+					}
+					else
+					{
+						completed = f->distance * (double)(now - departure) /
+							(double)(f->duration < 0 ? -f->duration : f->duration);
+
+						completed /= EARTH_RADIUS;
+
+						if (f->duration > 0)
+							pos = GCTravel(fra->lat, fra->lon, completed, f->bearing);
+						else
+							pos = GCTravel(ap->lat, ap->lon, completed, f->bearing);
+					}
+
+					// As from FRA no flights will wrap around, this is sufficient
+					x = (int)(( pos.lon + 180.0) / 360.0 * (double)rc.width) + rc.x;
+					y = (int)((-pos.lat +  90.0) / 180.0 * (double)rc.height) + rc.y;
 
 #ifdef _DEBUG
-				if (selected == i)
-				{
-					dc.SetPen(wxPen(wxColour(255, 0, 0), 1, wxPENSTYLE_LONG_DASH));
-					dc.SetBrush(*wxTRANSPARENT_BRUSH);
-					dc.DrawCircle(x, y, 12);
-					dc.DrawLine(x + 3, y, x + 100, y);
-					dc.DrawLine(x - 3, y, x - 100, y);
-					dc.DrawLine(x, y + 3, x, y + 100);
-					dc.DrawLine(x, y - 3, x, y - 100);
-					dc.SetPen(*wxTRANSPARENT_PEN);
-				}
+					if (selected == i)
+					{
+						// Draw cross hairs
+						dc.SetPen(wxPen(wxColour(255, 0, 0), 1, wxPENSTYLE_LONG_DASH));
+						dc.SetBrush(*wxTRANSPARENT_BRUSH);
+						dc.DrawCircle(x, y, 12);
+						dc.DrawLine(x + 3, y, x + 100, y);
+						dc.DrawLine(x - 3, y, x - 100, y);
+						dc.DrawLine(x, y + 3, x, y + 100);
+						dc.DrawLine(x, y - 3, x, y - 100);
+						dc.SetPen(*wxTRANSPARENT_PEN);
+					}
 #endif
 
-				if (flights[i].duration < 0)
-					dc.SetBrush(wxBrush(wxColour(255, 255, 0)));
-				else
-					dc.SetBrush(wxBrush(wxColour(255, 127, 0)));
+					if (f->duration < 0)
+						dc.SetBrush(wxBrush(wxColour(255, 255, 0)));
+					else
+						dc.SetBrush(wxBrush(wxColour(255, 127, 0)));
 
-				dc.DrawRectangle(x - w / 2, y - w / 2, w, w);
+					dc.DrawRectangle(x - w / 2, y - w / 2, w, w);
+				}
 			}
 		}
 	}
