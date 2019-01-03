@@ -1,11 +1,11 @@
 /Makefile
 /.codelite
 /Debug
-/DebugPreview
-/DebugScrenshotContainer
+/Debug_Preview
+/Debug_ScreenshotContainer
 /Makefiles
 /Release
-/Release32
-/Release64
+/Release_Win32
+/Release_Win64
 /fra-airtraffic.mk
 /fra-airtraffic.txt
