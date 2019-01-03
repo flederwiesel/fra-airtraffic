@@ -28,8 +28,6 @@
 
 #ifdef  _MSC_VER
 static const double NAN = std::numeric_limits<double>::quiet_NaN();
-#else
-#define isnan(x) __isnan(x)
 #endif
 
 wxBitmap SaverContent::bkgnd;
