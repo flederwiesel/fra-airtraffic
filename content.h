@@ -48,7 +48,7 @@ private:
 
 	void DrawInfoText(wxAutoBufferedPaintDC &dc);
 
-	static void ParseJSON(const char *name, const char *value, JsonType_t type);
+	static void ParseSchedule(const char *name, const char *value, JsonType_t type);
 
 private:
 

@@ -119,7 +119,7 @@ SaverContent::SaverContent(wxWindow* parent) :
 						  wxT("/flederwiesel/fra-airtraffic/schedule.json"));
 #endif
 
-			::ParseJSON(data.c_str(), ParseJSON);
+			::ParseJSON(data.c_str(), ParseSchedule);
 
 			num = airports.size();
 
@@ -582,7 +582,7 @@ void SaverContent::OnKeyDown(wxKeyEvent &event)
 }
 #define append push_back
 
-void SaverContent::ParseJSON(const char *name, const char *value, JsonType_t type)
+void SaverContent::ParseSchedule(const char *name, const char *value, JsonType_t type)
 {
 	size_t n;
 	static airport_t a;
