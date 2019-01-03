@@ -155,6 +155,9 @@ SaverContent::SaverContent(wxWindow* parent) :
 				}
 			}
 
+			if (NULL == fra)
+				throw std::runtime_error("FRA disappeared!");
+
 			// Get distance and bearing for each flight
 			for (i = 0; i < flights.size(); i++)
 			{
