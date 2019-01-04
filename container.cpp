@@ -76,11 +76,13 @@ SaverContainer::SaverContainer() :
 			ymax = rect.y + rect.height;
 	}
 
+	// Eliminate flicker upon application start
+	SetBackgroundStyle(wxBG_STYLE_PAINT);
+
 	// This operates on one display only
 	ShowFullScreen(true);
 	// Expand to virtual screens
 	SetSize(xmin, ymin, xmax - xmin, ymax - ymin);
-
 
 	for (m = 0; m < monitors; m++)
 	{
