@@ -33,6 +33,8 @@ public:
 	SaverContent(wxWindow *parent);
 	~SaverContent();
 
+	static long InitialiseStaticVars();
+
 	static void SetPointSize(unsigned int);
 
 	static void GetTime(long &);

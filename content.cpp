@@ -61,148 +61,20 @@ END_EVENT_TABLE()
 SaverContent::SaverContent(wxWindow* parent) :
 	wxWindow(parent, 0)
 {
-	size_t num;
-	struct tm *local;
-	airport_t *ap;
-	flight_t *f;
-	size_t i;
+	static int init = 1;
 
-	if (-1 == now)
+	if (init)
 	{
-		time((time_t*)&now);
-		local = localtime((time_t*)&now);
-	}
-	else
-	{
-		local = NULL;
-	}
-
-	if (local)
-	{
-		now = local->tm_hour * 3600 + (local->tm_min - local->tm_min % 10) * 60;
-	}
-	else
-	{
-		now %= 86400;
-		now -= now % 600;
+		InitialiseStaticVars();
+		init = 0;
 	}
 
 	SetBackgroundStyle(wxBG_STYLE_PAINT);
 
-	if (bkgnd.IsNull())
-	{
-		wxImage::AddHandler(new wxJPEGHandler);
-
-		// https://visibleearth.nasa.gov/useterms.php
-#ifdef _DEBUG
-		wxString imagepath(wxGetCwd() + wxT("/img/bluemarble"));
-#else
-		wxString imagepath(MyStandardPaths::Get().GetResourceDir() +
-						   wxT("/flederwiesel/fra-airtraffic/img"));
-#endif
-		imagepath.append(
-			wxString::Format(wxT("/1920x960/bmng/%02d.jpg"),
-							 local ? local->tm_mon ? local->tm_mon + 1 : 2 : 2));
-
-		bkgnd.LoadFile(imagepath, wxBITMAP_TYPE_JPEG);
-	}
-
-	if (clock.IsNull())
-	{
-		wxImage::AddHandler(new wxPNGHandler);
-
-#ifdef _DEBUG
-		wxString imagepath(wxGetCwd() + wxT("/img/clock.png"));
-#else
-		wxString imagepath(MyStandardPaths::Get().GetResourceDir() +
-						   wxT("/flederwiesel/fra-airtraffic/img/clock.png"));
-#endif
-
-		clock.LoadFile(imagepath, wxBITMAP_TYPE_PNG);
-	}
-
-	if (0 == airports.size() && 0 == flights.size())
-	{
-		if (0 == airports.size())
-		{
-#ifdef _DEBUG
-			wxString data(wxGetCwd() + wxT("/json/schedule-debug.json"));
-#else
-			wxString data(MyStandardPaths::Get().GetDataDir() +
-						  wxT("/flederwiesel/fra-airtraffic/schedule.json"));
-#endif
-			// ParseSchedule() populates `airports` and `flights`
-			::ParseJSON(data.c_str(), ParseSchedule);
-
-			if (0 == airports.size() ||
-				0 == flights.size())
-			{
-				throw std::runtime_error("Error initialising tables.");
-			}
-			else
-			{
-				// Get FRA coordinates
-				num = airports.size();
-
-				while (num--)
-				{
-					if (airports[num].icao)
-					if (0 == strcmp("EDDF", airports[num].icao))
-					{
-						fra = &airports[num];
-						break;
-					}
-				}
-			}
-
-			if (NULL == fra)
-				throw std::runtime_error("FRA disappeared!");
-
-			// Get distance and bearing for each flight
-			for (i = 0; i < flights.size(); i++)
-			{
-				f = &flights[i];
-
-				if (f->airport < airports.size())
-				{
-					ap = &airports[f->airport];
-
-					if (!wxIsNaN(ap->lat) &&
-						!wxIsNaN(ap->lon))
-					{
-						if (fra == ap)
-						{
-							f->distance = 0.0;
-							f->bearing = 0.0;
-						}
-						else
-						{
-							f->distance = GCDistance(fra->lat, fra->lon, ap->lat, ap->lon);
-							f->distance *= EARTH_RADIUS;
-
-							// openflights.org calculates flight duration as
-							// "30 min plus 1 hour per every 500 miles".
-							// If it fits their purpose, it is good enough for us...
-							if (f->duration < 0)
-								f->duration = -1800 - (long)(f->distance / 5.0 * 36.0);
-							else
-								f->duration = 1800 + (long)(f->distance / 5.0 * 36.0);
-
-							if (f->duration > 0)
-								f->bearing = GCBearing(fra->lat, fra->lon, ap->lat, ap->lon);
-							else
-								f->bearing = GCBearing(ap->lat, ap->lon, fra->lat, fra->lon);
-						}
-					}
-				}
-			}
-		}
-	}
-
 	if (refs < ElementsIn(savers))
 		savers[refs++] = this;
 }
-
+
 SaverContent::~SaverContent()
 {
 	size_t n;
@@ -230,6 +102,133 @@ SaverContent::~SaverContent()
 		}
 #endif
 	}
+}
+
+long SaverContent::InitialiseStaticVars()
+{
+	size_t num;
+	unsigned int month;
+	struct tm *local;
+	airport_t *ap;
+	flight_t *f;
+	size_t i;
+
+	// Initialise `now` to the current 10-min interval
+	time((time_t*)&now);
+	local = localtime((time_t*)&now);
+
+	if (local)
+	{
+		now = local->tm_hour * 3600 + (local->tm_min - local->tm_min % 10) * 60;
+		month = (unsigned int)local->tm_mon + 1;
+	}
+	else
+	{
+		now %= 86400;
+		now -= now % 600;
+		month = 2;
+	}
+
+	// Load Images
+	wxImage::AddHandler(new wxJPEGHandler);
+	wxImage::AddHandler(new wxPNGHandler);
+
+	// Earth background image
+	//   https://visibleearth.nasa.gov/useterms.php
+#ifdef _DEBUG
+	wxString imagepath(wxGetCwd() + wxT("/img/bluemarble"));
+#else
+	wxString imagepath(MyStandardPaths::Get().GetResourceDir() +
+					   wxT("/flederwiesel/fra-airtraffic/img"));
+#endif
+	imagepath.append(wxString::Format(wxT("/1920x960/bmng/%02d.jpg"), month));
+
+	bkgnd.LoadFile(imagepath, wxBITMAP_TYPE_JPEG);
+
+	// Clock
+#ifdef _DEBUG
+	imagepath = wxGetCwd() + wxT("/img/clock.png");
+#else
+	imagepath = MyStandardPaths::Get().GetResourceDir() +
+					wxT("/flederwiesel/fra-airtraffic/img/clock.png");
+#endif
+
+	clock.LoadFile(imagepath, wxBITMAP_TYPE_PNG);
+
+	// Flight data
+#ifdef _DEBUG
+	wxString data(wxGetCwd() + wxT("/json/schedule-debug.json"));
+#else
+	wxString data(MyStandardPaths::Get().GetDataDir() +
+				  wxT("/flederwiesel/fra-airtraffic/schedule.json"));
+#endif
+	// ParseSchedule() populates `airports` and `flights`
+	ParseJSON(data.c_str(), ParseSchedule);
+
+	if (0 == airports.size() ||
+		0 == flights.size())
+	{
+		throw std::runtime_error("Error initialising tables.");
+	}
+	else
+	{
+		// Get FRA coordinates
+		num = airports.size();
+
+		while (num--)
+		{
+			if (airports[num].icao)
+			if (0 == strcmp("EDDF", airports[num].icao))
+			{
+				fra = &airports[num];
+				break;
+			}
+		}
+
+		if (NULL == fra)
+			throw std::runtime_error("FRA disappeared!");
+
+		// Get distance and bearing for each flight
+		for (i = 0; i < flights.size(); i++)
+		{
+			f = &flights[i];
+
+			if (f->airport < airports.size())
+			{
+				ap = &airports[f->airport];
+
+				if (!wxIsNaN(ap->lat) &&
+					!wxIsNaN(ap->lon))
+				{
+					if (fra == ap)
+					{
+						f->distance = 0.0;
+						f->bearing = 0.0;
+					}
+					else
+					{
+						f->distance = GCDistance(fra->lat, fra->lon, ap->lat, ap->lon);
+						f->distance *= EARTH_RADIUS;
+
+						// openflights.org calculates flight duration as
+						// "30 min plus 1 hour per every 500 miles".
+						// If it fits their purpose, it is good enough for us...
+						if (f->duration < 0)
+							f->duration = -1800 - (long)(f->distance / 5.0 * 36.0);
+						else
+							f->duration = 1800 + (long)(f->distance / 5.0 * 36.0);
+
+						if (f->duration > 0)
+							f->bearing = GCBearing(fra->lat, fra->lon, ap->lat, ap->lon);
+						else
+							f->bearing = GCBearing(ap->lat, ap->lon, fra->lat, fra->lon);
+					}
+				}
+			}
+		}
+	}
+
+	return now;
 }
 
 void SaverContent::SetPointSize(unsigned int size)
@@ -395,7 +394,7 @@ void SaverContent::DrawInfoText(wxAutoBufferedPaintDC &dc)
 				wxT("NASA Earth Observatory http://visibleearth.nasa.gov"),
 				rc.x, rc.y + rc.height);
 }
-
+
 void SaverContent::OnPaint(wxPaintEvent &event)
 {
 	wxAutoBufferedPaintDC dc(this);
