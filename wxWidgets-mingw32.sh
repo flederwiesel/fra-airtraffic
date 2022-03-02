@@ -26,7 +26,7 @@ export PATH=$(echo $PATH | sed -r 's#^:*[^:]*/cygwin[^:]+:*|:+[^:]*/cygwin[^:]+|
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 cd "$scriptdir/wxWidgets"
 
-[ -n "$clean" ] && rm -rf build/msw/gcc_* lib/gcc_* include/wx/msw/setup.h
+[ -n "$clean" ] && rm -rf build/msw/gcc_* lib/gcc_*
 
 # https://trac.wxwidgets.org/ticket/17844
 if ! [ -f patch-stamp ]; then
@@ -36,12 +36,12 @@ diff -raupN a/build/bakefiles/wx.bkl b/build/bakefiles/wx.bkl
 +++ b/build/bakefiles/wx.bkl	2018-02-19 18:59:33.623001800 +0100
 @@ -205,7 +205,7 @@
              <depends-on-file>$(SRCDIR)/include/wx/msw/genrcdefs.h</depends-on-file>
- 
+
              <command>
 -                $(DOLLAR)(CPP) "$(nativePaths(SRCDIR))\include\wx\msw\genrcdefs.h" > "$(SETUPHDIR)\wx\msw\rcdefs.h"
 +                $(DOLLAR)(CPP) $(DOLLAR)(CPPFLAGS) "$(nativePaths(SRCDIR))\include\wx\msw\genrcdefs.h" > "$(SETUPHDIR)\wx\msw\rcdefs.h"
              </command>
- 
+
          </action>
 EOF
 	touch patch-stamp

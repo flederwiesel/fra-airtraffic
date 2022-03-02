@@ -10,12 +10,7 @@ cd /d "%~dp0"
 
 setlocal EnableDelayedExpansion
 
-cd wxWidgets
-
-if not exist include\wx\msw\setup.h^
- copy include\wx\msw\setup0.h include\wx\msw\setup.h
-
-cd build\msw
+cd wxWidgets\build\msw
 
 for %%p in (Win32 x64) do (
 	for %%c in ("DLL Debug" "DLL Release") do (

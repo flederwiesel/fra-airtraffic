@@ -71,15 +71,15 @@ Source: msvc/x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignorevers
 #if (WXDLL == "GCC")
 ; currently TDM-GCC compiled version does not work on the login screen:
 ; https://sourceforge.net/p/tdm-gcc/bugs/324/
-Source: {#WXWIN}/lib/gcc_dll32/wxbase312u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll32/wxmsw312u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxbase312u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxmsw312u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll32/wxbase315u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll32/wxmsw315u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll64/wxbase315u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/gcc_dll64/wxmsw315u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 #else
-Source: {#WXWIN}/lib/vc_dll/wxbase312u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_dll/wxmsw312u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxbase312u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxmsw312u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxbase315u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxmsw315u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxbase315u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxmsw315u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
 Source: msvc/redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
 Source: msvc/redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
@@ -90,10 +90,11 @@ Source: ../img/bluemarble/1920x960/*; DestDir: {app}/img/1920x960; Flags: recurs
 Source: ../json/schedule.json; DestDir: {commonappdata}/flederwiesel/fra-airtraffic; Flags: ignoreversion; Permissions: authusers-modify everyone-readexec; Excludes: test.json
 
 [InstallDelete]
-Type: files; Name: {app}/wxbase311u_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxmsw311u_core_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxbase311u_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxmsw311u_core_gcc_flederwiesel.dll
+; On update, delete old versions first
+Type: files; Name: {app}/wxbase*u_gcc_flederwiesel.dll
+Type: files; Name: {app}/wxmsw*u_core_gcc_flederwiesel.dll
+Type: files; Name: {app}/wxbase*u_gcc_flederwiesel.dll
+Type: files; Name: {app}/wxmsw*u_core_gcc_flederwiesel.dll
 
 [Registry]
 #define SCRNSAVE_EXE '{sys}\fra-airtraffic.scr'
@@ -429,7 +430,7 @@ begin
 				'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
 				'PATH', path);
 		end;
-		
+
 		// restore settings from previous data, unless we are not selected screensaver any more
 		for i := 0 to 1 do
 		begin
