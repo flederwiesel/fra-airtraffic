@@ -1,3 +1,4 @@
+build/.vs
 build/Win32
 build/ipch
 build/redist
