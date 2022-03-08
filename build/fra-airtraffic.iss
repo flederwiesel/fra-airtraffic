@@ -1,5 +1,4 @@
 #define WXWIN "../wxWidgets"
-#define WXDLL "MSVC"
 
 #define ApplicationVersion GetFileVersion('msvc/x64/Release/fra-airtraffic.scr')
 
@@ -68,14 +67,6 @@ Name: de; MessagesFile: compiler:languages\german.isl
 Source: msvc/Win32/Release/fra-airtraffic.scr; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: msvc/x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
-#if (WXDLL == "GCC")
-; currently TDM-GCC compiled version does not work on the login screen:
-; https://sourceforge.net/p/tdm-gcc/bugs/324/
-Source: {#WXWIN}/lib/gcc_dll32/wxbase315u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll32/wxmsw315u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxbase315u_gcc_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/gcc_dll64/wxmsw315u_core_gcc_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
-#else
 Source: {#WXWIN}/lib/vc_dll/wxbase315u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/vc_dll/wxmsw315u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/vc_x64_dll/wxbase315u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
@@ -83,7 +74,6 @@ Source: {#WXWIN}/lib/vc_x64_dll/wxmsw315u_core_vc_x64_flederwiesel.dll; DestDir:
 
 Source: msvc/redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
 Source: msvc/redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
-#endif
 
 Source: ../img/clock.png; DestDir: {app}/img; Flags: recursesubdirs ignoreversion
 Source: ../img/bluemarble/1920x960/*; DestDir: {app}/img/1920x960; Flags: recursesubdirs ignoreversion; Excludes: bmng_tb
@@ -91,10 +81,10 @@ Source: ../json/schedule.json; DestDir: {commonappdata}/flederwiesel/fra-airtraf
 
 [InstallDelete]
 ; On update, delete old versions first
-Type: files; Name: {app}/wxbase*u_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxmsw*u_core_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxbase*u_gcc_flederwiesel.dll
-Type: files; Name: {app}/wxmsw*u_core_gcc_flederwiesel.dll
+Type: files; Name: {app}/wxbase*u_vc_flederwiesel.dll;         Check: NOT Is64BitInstallMode
+Type: files; Name: {app}/wxmsw*u_core_vc_flederwiesel.dll;     Check: NOT Is64BitInstallMode
+Type: files; Name: {app}/wxbase*u_vc_x64_flederwiesel.dll;     Check:     Is64BitInstallMode
+Type: files; Name: {app}/wxmsw*u_core_vc_x64_flederwiesel.dll; Check:     Is64BitInstallMode
 
 [Registry]
 #define SCRNSAVE_EXE '{sys}\fra-airtraffic.scr'
