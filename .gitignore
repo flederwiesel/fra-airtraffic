@@ -1,0 +1,8 @@
+build/Win32
+build/ipch
+build/redist
+build/x64
+*.aps
+*.exe
+*.sdf
+*.suo

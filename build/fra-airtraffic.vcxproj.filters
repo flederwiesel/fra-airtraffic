@@ -15,54 +15,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\gc.c">
+    <ClCompile Include="..\gc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\json.c">
+    <ClCompile Include="..\json.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\stdpaths.cpp">
+    <ClCompile Include="..\stdpaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\container.cpp">
+    <ClCompile Include="..\container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\content.cpp">
+    <ClCompile Include="..\content.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main.cpp">
+    <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\preview.cpp">
+    <ClCompile Include="..\preview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\screenshot.cpp">
+    <ClCompile Include="..\screenshot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\fra-airtraffic.h">
+    <ClInclude Include="..\fra-airtraffic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gc.h">
+    <ClInclude Include="..\gc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\json.h">
+    <ClInclude Include="..\json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\stdpaths.h">
+    <ClInclude Include="..\stdpaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\container.h">
+    <ClInclude Include="..\container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\content.h">
+    <ClInclude Include="..\content.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\preview.h">
+    <ClInclude Include="..\preview.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\screenshot.h">
+    <ClInclude Include="..\screenshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -75,10 +75,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\img\JA805A.ico">
+    <None Include="..\img\JA805A.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\json\schedule.json">
+    <None Include="..\json\schedule.json">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

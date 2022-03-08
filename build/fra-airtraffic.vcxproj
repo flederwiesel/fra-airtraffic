@@ -204,7 +204,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -220,7 +220,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -236,7 +236,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -252,7 +252,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -268,7 +268,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -284,7 +284,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -302,7 +302,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -322,7 +322,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -342,7 +342,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -362,7 +362,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_MATH_DEFINES;__WXMSW__;WXUSINGDLL;wxUSE_GUI=1</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;../..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)/include/msvc;$(WXWIN)/include;..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -373,32 +373,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\gc.c" />
-    <ClCompile Include="..\..\json.c" />
-    <ClCompile Include="..\..\stdpaths.cpp" />
-    <ClCompile Include="..\..\container.cpp" />
-    <ClCompile Include="..\..\content.cpp" />
-    <ClCompile Include="..\..\main.cpp" />
-    <ClCompile Include="..\..\preview.cpp" />
-    <ClCompile Include="..\..\screenshot.cpp" />
+    <ClCompile Include="..\gc.c" />
+    <ClCompile Include="..\json.c" />
+    <ClCompile Include="..\stdpaths.cpp" />
+    <ClCompile Include="..\container.cpp" />
+    <ClCompile Include="..\content.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\preview.cpp" />
+    <ClCompile Include="..\screenshot.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\fra-airtraffic.h" />
-    <ClInclude Include="..\..\gc.h" />
-    <ClInclude Include="..\..\json.h" />
-    <ClInclude Include="..\..\stdpaths.h" />
-    <ClInclude Include="..\..\container.h" />
-    <ClInclude Include="..\..\content.h" />
-    <ClInclude Include="..\..\preview.h" />
-    <ClInclude Include="..\..\screenshot.h" />
+    <ClInclude Include="..\fra-airtraffic.h" />
+    <ClInclude Include="..\gc.h" />
+    <ClInclude Include="..\json.h" />
+    <ClInclude Include="..\stdpaths.h" />
+    <ClInclude Include="..\container.h" />
+    <ClInclude Include="..\content.h" />
+    <ClInclude Include="..\preview.h" />
+    <ClInclude Include="..\screenshot.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="fra-airtraffic.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\img\JA805A.ico" />
-    <None Include="..\..\json\schedule.json" />
+    <None Include="..\img\JA805A.ico" />
+    <None Include="..\json\schedule.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

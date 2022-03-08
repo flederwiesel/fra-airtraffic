@@ -20,9 +20,9 @@ if not exist redist\vcredist_x64.exe (
 		"%~dp0redist\vcredist_x64.exe" || exit /b %errorlevel%
 )
 
-%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x86 && MSBuild.exe /p:Configuration=Release /p:Platform=Win32 %~dp0\fra-airtraffic.sln" && ^
-%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x64 && MSBuild.exe /p:Configuration=Release /p:Platform=x64   %~dp0\fra-airtraffic.sln" && ^
-iscc "%~dp0..\fra-airtraffic.iss"
+%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x86 && MSBuild.exe /p:Configuration=Release /p:Platform=Win32 %~dp0fra-airtraffic.sln" && ^
+%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x64 && MSBuild.exe /p:Configuration=Release /p:Platform=x64   %~dp0fra-airtraffic.sln" && ^
+iscc "%~dp0fra-airtraffic.iss"
 
 if %errorlevel% == 0 goto :eof
 

@@ -1,6 +1,6 @@
 #define WXWIN "../wxWidgets"
 
-#define ApplicationVersion GetFileVersion('msvc/x64/Release/fra-airtraffic.scr')
+#define ApplicationVersion GetFileVersion('x64/Release/fra-airtraffic.scr')
 
 [Setup]
 ; Registry key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{AppId}_is1
@@ -64,16 +64,16 @@ Name: en; MessagesFile: compiler:default.isl
 Name: de; MessagesFile: compiler:languages\german.isl
 
 [Files]
-Source: msvc/Win32/Release/fra-airtraffic.scr; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: msvc/x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: Win32/Release/fra-airtraffic.scr; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
 Source: {#WXWIN}/lib/vc_dll/wxbase315u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/vc_dll/wxmsw315u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: {#WXWIN}/lib/vc_x64_dll/wxbase315u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 Source: {#WXWIN}/lib/vc_x64_dll/wxmsw315u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
-Source: msvc/redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
-Source: msvc/redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
+Source: redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
+Source: redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
 
 Source: ../img/clock.png; DestDir: {app}/img; Flags: recursesubdirs ignoreversion
 Source: ../img/bluemarble/1920x960/*; DestDir: {app}/img/1920x960; Flags: recursesubdirs ignoreversion; Excludes: bmng_tb
