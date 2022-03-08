@@ -65,12 +65,12 @@
     <ClInclude Include="..\screenshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="..\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="fra-airtraffic.rc">
+    <ResourceCompile Include="..\fra-airtraffic.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -119,7 +119,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-ApplicationIcon         ICON                    "..\\img\\JA805A.ico"
+ApplicationIcon         ICON                    "img\\JA805A.ico"
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 

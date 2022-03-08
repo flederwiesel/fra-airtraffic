@@ -391,10 +391,10 @@
     <ClInclude Include="..\content.h" />
     <ClInclude Include="..\preview.h" />
     <ClInclude Include="..\screenshot.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="fra-airtraffic.rc" />
+    <ResourceCompile Include="..\fra-airtraffic.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\img\JA805A.ico" />
