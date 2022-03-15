@@ -5,7 +5,7 @@ Else
 	strFileURL = WScript.Arguments.Item(0)
 	strHDLocation = WScript.Arguments.Item(1)
 
-	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP")
+	Set objXMLHTTP = CreateObject("MSXML2.XMLHTTP.6.0")
 
 	objXMLHTTP.open "GET", strFileURL, false
 	objXMLHTTP.send()
