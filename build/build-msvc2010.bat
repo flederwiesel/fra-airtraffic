@@ -7,7 +7,18 @@ if "%VS100COMNTOOLS%" == "" (
 	exit /b 9009
 )
 
-rd /S /Q "%~dp0Win32" "%~dp0x64"
+rem === Delete output, if clean build is requested
+
+if "%1" == "/c" set build=clean
+if "%1" == "-c" set build=clean
+if "%1" == "/clean" set build=clean
+if "%1" == "--clean" set build=clean
+
+if "%build%" == "clean" (
+	for %%d in ("%~dp0Win32" "%~dp0x64") do (
+		if exist "%%d" rmdir /s /q "%%d"
+	)
+)
 
 for %%p in (Win32 x64) do (
 	rem === Source environment
