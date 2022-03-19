@@ -15,8 +15,14 @@ if "%1" == "/clean" set build=clean
 if "%1" == "--clean" set build=clean
 
 if "%build%" == "clean" (
-	for %%d in ("%~dp0Win32" "%~dp0x64") do (
-		if exist "%%d" rmdir /s /q "%%d"
+	for %%d in ( ^
+		"%~dp0../wxWidgets/lib/vc_dll" ^
+		"%~dp0../wxWidgets/lib/vc_x64_dll" ^
+		"%~dp0../wxWidgets/build/msw/vc_mswudll" ^
+		"%~dp0../wxWidgets/build/msw/vc_x64_mswudll" ^
+		"%~dp0Win32" ^
+		"%~dp0x64") do (
+		if exist %%d rmdir /s /q %%d
 	)
 )
 
@@ -28,10 +34,24 @@ for %%p in (Win32 x64) do (
 
 	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" %platform%
 
+	rem === Build wxWidgets
+
+	for %%c in ("DLL Debug" "DLL Release") do (
+		if not exist %~dp0%%p\xWidgets-%%c.stamp (
+			if not exist "%~dp0%%p" mkdir "%~dp0%%p"
+
+			MSBuild -m -p:wxVendor=flederwiesel -p:Configuration=%%c -p:Platform=%%p ^
+				"%~dp0../wxWidgets/build/msw/wx_vc10.sln" || ^
+			exit /b 2
+
+			type nul >> "%~dp0%%p\xWidgets-%%c.stamp"
+		)
+	)
+
 	rem === Build fra-airtraffic
 
 	MSBuild -m -p:Configuration=Release -p:Platform=%%p "%~dp0fra-airtraffic.sln" || ^
-	exit /b 2
+	exit /b 3
 )
 
 :: download resistributable
