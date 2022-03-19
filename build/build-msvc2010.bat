@@ -52,22 +52,22 @@ for %%p in (Win32 x64) do (
 
 	MSBuild -m -p:Configuration=Release -p:Platform=%%p "%~dp0fra-airtraffic.sln" || ^
 	exit /b 3
+
+	rem === Download redistributable
+
+	if "x86" == "!platform!" set dlpath=C/6/D/C6D0FD4E-9E53-4897-9B91-836EBA2AACD3/vcredist_x86.exe
+	if "x64" == "!platform!" set dlpath=A/8/0/A80747C3-41BD-45DF-B505-E9710D2744E0/vcredist_x64.exe
+
+	if not exist "%~dp0redist" md "%~dp0redist" || exit /b 4
+
+	if not exist redist\vcredist_!platform!.exe (
+		cscript.exe //nologo "%~dp0download.vbs" ^
+			"https://download.microsoft.com/download/!dlpath!" ^
+			"%~dp0redist\vcredist_!platform!.exe" || exit /b 4
+	)
 )
 
-:: download resistributable
-if not exist "%~dp0redist" md "%~dp0redist" || exit /b %errorlevel%
-
-if not exist redist\vcredist_x86.exe (
-	cscript.exe //nologo "%~dp0download.vbs" ^
-		"https://download.microsoft.com/download/C/6/D/C6D0FD4E-9E53-4897-9B91-836EBA2AACD3/vcredist_x86.exe" ^
-		"%~dp0redist\vcredist_x86.exe" || exit /b %errorlevel%
-)
-
-if not exist redist\vcredist_x64.exe (
-	cscript.exe //nologo "%~dp0download.vbs" ^
-		"https://download.microsoft.com/download/A/8/0/A80747C3-41BD-45DF-B505-E9710D2744E0/vcredist_x64.exe" ^
-		"%~dp0redist\vcredist_x64.exe" || exit /b %errorlevel%
-)
+rem === Build and sign installer
 
 iscc "%~dp0fra-airtraffic.iss"
 
