@@ -1,9 +1,27 @@
+@echo off
+
+setlocal EnableExtensions EnableDelayedExpansion
+
 if "%VS100COMNTOOLS%" == "" (
 	echo MSVC not found. >&2
 	exit /b 9009
 )
 
 rd /S /Q "%~dp0Win32" "%~dp0x64"
+
+for %%p in (Win32 x64) do (
+	rem === Source environment
+
+	if "Win32" == "%%p" set platform=x86
+	if "x64"   == "%%p" set platform=x64
+
+	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" %platform%
+
+	rem === Build fra-airtraffic
+
+	MSBuild -m -p:Configuration=Release -p:Platform=%%p "%~dp0fra-airtraffic.sln" || ^
+	exit /b 2
+)
 
 :: download resistributable
 if not exist "%~dp0redist" md "%~dp0redist" || exit /b %errorlevel%
@@ -20,8 +38,6 @@ if not exist redist\vcredist_x64.exe (
 		"%~dp0redist\vcredist_x64.exe" || exit /b %errorlevel%
 )
 
-%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x86 && MSBuild.exe /p:Configuration=Release /p:Platform=Win32 %~dp0fra-airtraffic.sln" && ^
-%COMSPEC% /c ""%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" x64 && MSBuild.exe /p:Configuration=Release /p:Platform=x64   %~dp0fra-airtraffic.sln" && ^
 iscc "%~dp0fra-airtraffic.iss"
 
 if %errorlevel% == 0 goto :eof
