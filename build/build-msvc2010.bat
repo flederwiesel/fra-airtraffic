@@ -71,11 +71,3 @@ for %%p in (Win32 x64) do (
 rem === Build and sign installer
 
 iscc "%~dp0fra-airtraffic.iss"
-
-if %errorlevel% == 0 goto :eof
-
-:error
-@echo off
-rem If started from explorer, let cmd window persist
-if /i not "%CMDCMDLINE:"=%" == "%COMSPEC%" pause
-exit /b %errorlevel%
