@@ -70,4 +70,4 @@ for %%p in (Win32 x64) do (
 
 rem === Build and sign installer
 
-iscc "%~dp0fra-airtraffic.iss"
+iscc "%~dp0fra-airtraffic.iss" || exit /b 5
