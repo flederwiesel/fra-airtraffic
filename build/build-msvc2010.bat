@@ -21,7 +21,8 @@ if "%build%" == "clean" (
 		"%~dp0../wxWidgets/build/msw/vc_mswudll" ^
 		"%~dp0../wxWidgets/build/msw/vc_x64_mswudll" ^
 		"%~dp0Win32" ^
-		"%~dp0x64") do (
+		"%~dp0x64" ^
+		"%~dp0redist") do (
 		if exist %%d rmdir /s /q %%d
 	)
 )
