@@ -16,10 +16,10 @@ if "%1" == "--clean" set build=clean
 
 if "%build%" == "clean" (
 	for %%d in ( ^
-		"%~dp0../wxWidgets/lib/vc_dll" ^
-		"%~dp0../wxWidgets/lib/vc_x64_dll" ^
-		"%~dp0../wxWidgets/build/msw/vc_mswudll" ^
-		"%~dp0../wxWidgets/build/msw/vc_x64_mswudll" ^
+		"%~dp0..\wxWidgets\lib\vc_dll" ^
+		"%~dp0..\wxWidgets\lib\vc_x64_dll" ^
+		"%~dp0..\wxWidgets\build\msw\vc_mswudll" ^
+		"%~dp0..\wxWidgets\build\msw\vc_x64_mswudll" ^
 		"%~dp0Win32" ^
 		"%~dp0x64" ^
 		"%~dp0redist") do (
@@ -33,7 +33,7 @@ for %%p in (Win32 x64) do (
 	if "Win32" == "%%p" set platform=x86
 	if "x64"   == "%%p" set platform=x64
 
-	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" %platform%
+	call "%VS100COMNTOOLS%\..\..\VC\vcvarsall.bat" !platform!
 
 	rem === Build wxWidgets
 
@@ -42,7 +42,7 @@ for %%p in (Win32 x64) do (
 			if not exist "%~dp0%%p" mkdir "%~dp0%%p"
 
 			MSBuild -m -p:wxVendor=flederwiesel -p:Configuration=%%c -p:Platform=%%p ^
-				"%~dp0../wxWidgets/build/msw/wx_vc10.sln" || ^
+				"%~dp0..\wxWidgets\build\msw\wx_vc10.sln" || ^
 			exit /b 2
 
 			type nul >> "%~dp0%%p\xWidgets-%%c.stamp"
