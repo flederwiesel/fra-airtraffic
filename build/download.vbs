@@ -1,5 +1,6 @@
 ' https://superuser.com/questions/59465/is-it-possible-to-download-using-the-windows-command-line#answer-59489
 If WScript.Arguments.Length < 2 Then
+	Wscript.Echo "Usage: " + Wscript.ScriptName + " <url> <local file>"
 	WScript.Quit(1)
 Else
 	strFileURL = WScript.Arguments.Item(0)
