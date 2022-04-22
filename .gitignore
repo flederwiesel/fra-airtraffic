@@ -1,5 +1,6 @@
 build/.vs
 build/Win32
+build/dubious.pfx
 build/ipch
 build/redist
 build/x64

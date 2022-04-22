@@ -52,8 +52,12 @@ WizardSmallImageFile=../img/setup_header.bmp
 Compression=lzma/max
 OutputDir=.
 OutputBaseFilename=fra-airtraffic-{#ApplicationVersion}
-; signtool.exe sign $p $f
-SignTool=signtool /t http://time.certum.pl /n "Open Source Developer, Tobias Kühne" /d "fra-airtraffic.scr"
+; In Inno Setup, configure sign tool "signtool" as `"\path\to\signtool.exe" sign $p $f`
+#if GetEnv("FRA_AIRTRAFFIC_CERT") != ""
+SignTool=signtool {#GetEnv("FRA_AIRTRAFFIC_CERT")}
+#else
+SignTool=signtool -f "{#SourcePath}\dubious.pfx" -p 1234
+#endif
 SignedUninstaller=yes
 
 UninstallFilesDir=uninst
@@ -67,10 +71,10 @@ Name: de; MessagesFile: compiler:languages\german.isl
 Source: Win32/Release/fra-airtraffic.scr; DestDir: {sys}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
 Source: x64/Release/fra-airtraffic.scr;   DestDir: {sys}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
-Source: {#WXWIN}/lib/vc_dll/wxbase315u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_dll/wxmsw315u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxbase315u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
-Source: {#WXWIN}/lib/vc_x64_dll/wxmsw315u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxbase320u_vc_flederwiesel.dll;             DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_dll/wxmsw320u_core_vc_flederwiesel.dll;         DestDir: {app}; Flags: ignoreversion; Check: NOT Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxbase320u_vc_x64_flederwiesel.dll;     DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
+Source: {#WXWIN}/lib/vc_x64_dll/wxmsw320u_core_vc_x64_flederwiesel.dll; DestDir: {app}; Flags: ignoreversion; Check:     Is64BitInstallMode
 
 Source: redist/vcredist_x86.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check: NOT Is64BitInstallMode
 Source: redist/vcredist_x64.exe; DestDir: {tmp}; Flags: deleteafterinstall; Check:     Is64BitInstallMode
