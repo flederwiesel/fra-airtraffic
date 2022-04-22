@@ -23,7 +23,7 @@ AppUpdatesURL=https://github.com/flederwiesel/fra-airtraffic/releases
 AppComments={cm:appcomments}
 
 ; Setup.exe Versioninfo "Copyright"
-AppCopyright=©2017-2019 Tobias Kühne
+AppCopyright=©2017-2022 Tobias Kühne
 ; Setup.exe Versioninfo "File Version"
 VersionInfoVersion={#ApplicationVersion}
 ; Setup.exe Versioninfo "File Version" on <= Win98

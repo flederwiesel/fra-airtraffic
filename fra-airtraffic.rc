@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,0,3
+ PRODUCTVERSION 1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,12 +70,12 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic Bildschirmschoner"
-            VALUE "FileVersion", "1.0.3.0"
+            VALUE "FileVersion", "1.0.3"
             VALUE "InternalName", "fra-airtraffic.scr"
-            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2022 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic.scr"
             VALUE "ProductName", "fra-airtraffic"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.0"
             VALUE "Support", "https://www.fra-flugplan.de"
         END
         BLOCK "040904b0"
@@ -83,12 +83,12 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic screensaver"
-            VALUE "FileVersion", "1.0.3.0"
+            VALUE "FileVersion", "1.0.3"
             VALUE "InternalName", "fra-airtraffic.scr"
-            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2022 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic"
             VALUE "ProductName", "fra-airtraffic"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.0"
             VALUE "Support", "https://www.fra-flugplan.de"
         END
         BLOCK "0409fde9"
@@ -96,12 +96,12 @@ BEGIN
             VALUE "Comments", "https://www.fra-flugplan.de"
             VALUE "CompanyName", "fra-flugplan.de"
             VALUE "FileDescription", "fra-airtraffic screensaver"
-            VALUE "FileVersion", "1.0.3.0"
+            VALUE "FileVersion", "1.0.3"
             VALUE "InternalName", "fra-airtraffic"
-            VALUE "LegalCopyright", "Copyright © 2017-2019 Tobias Kühne"
+            VALUE "LegalCopyright", "Copyright © 2017-2022 Tobias Kühne"
             VALUE "OriginalFilename", "fra-airtraffic.scr"
             VALUE "ProductName", "fra-airtraffic"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.0"
             VALUE "Support", "https://www.fra-flugplan.de"
         END
     END
