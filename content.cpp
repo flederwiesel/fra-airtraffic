@@ -27,6 +27,9 @@
 #include "gc.h"
 
 #ifdef  _MSC_VER
+#ifdef NAN
+#undef NAN
+#endif
 static const double NAN = std::numeric_limits<double>::quiet_NaN();
 #endif
 
