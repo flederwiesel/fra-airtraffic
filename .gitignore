@@ -1,9 +1,10 @@
-build/.vs
-build/Win32
-build/dubious.pfx
-build/ipch
-build/redist
-build/x64
+build
+msvc-build/.vs
+msvc-build/Win32
+msvc-build/dubious.pfx
+msvc-build/ipch
+msvc-build/redist
+msvc-build/x64
 *.aps
 *.exe
 *.sdf
