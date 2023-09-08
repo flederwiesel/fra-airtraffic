@@ -17,11 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <wx/app.h>
-#include <wx/window.h>
-#include <wx/filename.h>
 #include "content.h"
 #include "screenshot.h"
+
+#include <wx/app.h>
+#include <wx/filename.h>
+#include <wx/window.h>
+
 
 BEGIN_EVENT_TABLE(ScreenshotContainer, wxWindow)
 	EVT_TIMER(-1, ScreenshotContainer::OnTimer)

@@ -17,11 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "json.h"
+
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include "json.h"
+
 
 #ifndef ElementsIn
 #define ElementsIn(a)	(sizeof(a) / sizeof(a)[0])
