@@ -18,7 +18,9 @@
  */
 
 #include "stdpaths.h"
+
 #include <wx/msgdlg.h>
+
 
 MyStandardPaths MyStandardPaths::my_gs_stdPaths;
 
