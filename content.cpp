@@ -640,7 +640,8 @@ void SaverContent::ParseSchedule(const char *name, const char *value, JsonType_t
 	if (JSON_NULL == type)
 	{
 		// error
-		throw(std::runtime_error((const char*)(wxString(name) + wxT(": ") + wxString(value))));
+		throw(std::runtime_error(wxString::Format("%s: %s", name, value).utf8_str()));
+
 	}
 	else if (JSON_ARRAY == type)
 	{

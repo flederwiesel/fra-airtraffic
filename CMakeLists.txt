@@ -19,6 +19,9 @@ set(CXX_STANDARD 11)
 set(CXX_STANDARD_REQUIRED OFF)
 set(CXX_EXTENSIONS OFF)
 
+# Minimize wxWidgets and set vendor name
+include(wxWidgets-features.cmake)
+
 # Use wxWidgets for drawing
 add_subdirectory(wxWidgets EXCLUDE_FROM_ALL)
 
