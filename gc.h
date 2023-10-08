@@ -25,6 +25,8 @@ extern "C"
 {
 #endif
 
+#include <stdio.h>
+
 #define deg(d)	((d) * 360.0 / 2.0 / M_PI)
 #define rad(d)	((d) * 2.0 * M_PI / 360.0)
 
