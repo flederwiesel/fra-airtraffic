@@ -1,0 +1,32 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    branches:
+    - 'master'
+    - 'feature/**'
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  build:
+    name: cmake configure & build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest, windows-2019 ]
+        include:
+        - vs_version: "Visual Studio 17 2022"
+          os: windows-latest
+        - vs_version: "Visual Studio 16 2019"
+          os: windows-2019
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Configure
+      run: cmake -B"${{ runner.workspace }}/b" -G"${{ matrix.vs_version }}"
+    - name: Build
+      run: cmake --build '${{ runner.workspace }}/b'
