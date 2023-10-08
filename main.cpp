@@ -17,17 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "container.h"
-#include "preview.h"
-#include "screenshot.h"
-#include "stdpaths.h"
-
-#include <wx/app.h>
-#include <wx/cmdline.h>
-#include <wx/wx.h>
-
 #include <stdlib.h>
-
+#include <wx/app.h>
+#include <wx/wx.h>
+#include <wx/cmdline.h>
+#include "stdpaths.h"
+#include "container.h"
+#include "screenshot.h"
+#include "preview.h"
 
 #ifdef _MSC_VER
 #define putenv	_putenv

@@ -17,11 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <wx/window.h>
 #include "fra-airtraffic.h"
 #include "preview.h"
-
-#include <wx/window.h>
-
 
 #define TIMER_PERIOD	10	/*[ms]*/
 

@@ -17,10 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gc.h"
-
 #include <float.h>
-
+#include "gc.h"
 
 double /*[rad]*/ GCBearing(double lat1, double lon1, double lat2, double lon2)
 {

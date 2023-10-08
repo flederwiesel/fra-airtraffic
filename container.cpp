@@ -17,13 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "container.h"
-#include "fra-airtraffic.h"
-
 #include <wx/app.h>
-#include <wx/display.h>
 #include <wx/window.h>
-
+#include <wx/display.h>
+#include "fra-airtraffic.h"
+#include "container.h"
 
 #define TIMER_PERIOD	25	/*[ms]*/
 

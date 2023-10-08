@@ -17,16 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "container.h"
-#include "content.h"
-#include "fra-airtraffic.h"
-#include "gc.h"
-#include "stdpaths.h"
-
 #include <float.h>
 #include <limits>
 #include <stdexcept>
-
+#include "stdpaths.h"
+#include "fra-airtraffic.h"
+#include "container.h"
+#include "content.h"
+#include "gc.h"
 
 #ifdef  _MSC_VER
 #ifdef NAN
